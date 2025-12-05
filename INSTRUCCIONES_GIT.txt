@@ -1,0 +1,124 @@
+═══════════════════════════════════════════════════════════════
+  GUÍA RÁPIDA: SUBIR PROYECTO A GIT
+═══════════════════════════════════════════════════════════════
+
+PASO 1: INSTALAR GIT (si no lo tienes)
+───────────────────────────────────────────────────────────────
+1. Descarga Git desde: https://git-scm.com/download/win
+2. Instala con opciones por defecto
+3. Reinicia PowerShell
+
+O instala con winget:
+   winget install Git.Git
+
+
+PASO 2: CONFIGURAR GIT (solo la primera vez)
+───────────────────────────────────────────────────────────────
+Abre PowerShell y ejecuta:
+
+   git config --global user.name "Tu Nombre"
+   git config --global user.email "tu-email@ejemplo.com"
+
+
+PASO 3: INICIALIZAR REPOSITORIO
+───────────────────────────────────────────────────────────────
+Abre PowerShell en la carpeta inventario-seguro y ejecuta:
+
+   cd C:\Users\soporte\Downloads\inventario-main\inventario-seguro
+   git init
+
+
+PASO 4: VERIFICAR QUE config.js NO SE VA A SUBIR
+───────────────────────────────────────────────────────────────
+   git status
+
+IMPORTANTE: config.js NO debe aparecer en la lista de archivos.
+Si aparece, verifica que .gitignore contenga "config.js"
+
+
+PASO 5: AGREGAR ARCHIVOS
+───────────────────────────────────────────────────────────────
+   git add .
+
+Verifica qué se agregó:
+   git status
+
+Debes ver:
+   ✅ index.html
+   ✅ script.js
+   ✅ security.js
+   ✅ estilo.css
+   ✅ sg.js
+   ✅ config.example.js
+   ✅ README.md
+   ✅ DEPLOY.md
+   ✅ .gitignore
+   ❌ config.js (NO debe aparecer)
+
+
+PASO 6: HACER COMMIT
+───────────────────────────────────────────────────────────────
+   git commit -m "Initial commit: Sistema de inventario seguro"
+
+
+PASO 7: CREAR REPOSITORIO EN GITHUB
+───────────────────────────────────────────────────────────────
+1. Ve a https://github.com
+2. Clic en "+" (arriba derecha) → "New repository"
+3. Nombre: inventario-seguro
+4. Descripción: Sistema de inventario seguro
+5. NO marques "Initialize with README"
+6. Clic en "Create repository"
+
+
+PASO 8: CONECTAR Y SUBIR
+───────────────────────────────────────────────────────────────
+GitHub te mostrará comandos. Ejecuta estos (reemplaza TU-USUARIO):
+
+   git remote add origin https://github.com/TU-USUARIO/inventario-seguro.git
+   git branch -M main
+   git push -u origin main
+
+Te pedirá autenticación. Usa un Personal Access Token:
+   https://github.com/settings/tokens
+
+
+═══════════════════════════════════════════════════════════════
+  VERIFICACIÓN FINAL
+═══════════════════════════════════════════════════════════════
+
+Antes de hacer push, verifica que config.js NO esté incluido:
+
+   git ls-files | findstr config.js
+
+Si NO muestra nada, está correcto.
+Si muestra "config.js", ejecuta:
+
+   git rm --cached config.js
+   git commit -m "Remove config.js from tracking"
+
+
+═══════════════════════════════════════════════════════════════
+  COMANDOS ÚTILES
+═══════════════════════════════════════════════════════════════
+
+Ver cambios:              git status
+Ver historial:            git log
+Actualizar desde repo:    git pull
+Subir cambios:           git add . && git commit -m "mensaje" && git push
+
+
+═══════════════════════════════════════════════════════════════
+  ⚠️  IMPORTANTE
+═══════════════════════════════════════════════════════════════
+
+❌ NUNCA subas config.js con credenciales reales
+✅ SÍ sube config.example.js (sin credenciales)
+✅ Verifica .gitignore antes de cada commit
+
+
+═══════════════════════════════════════════════════════════════
+
+Para más detalles, consulta: GIT_SETUP.md
+
+
